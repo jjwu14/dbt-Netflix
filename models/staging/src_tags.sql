@@ -1,4 +1,4 @@
-{{ config(materialized = 'table') }}
+
 
 WITH raw_tags AS (
   SELECT * FROM {{ source('movielens', 'raw_tags') }}
