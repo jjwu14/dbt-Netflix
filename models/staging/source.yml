@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: movielens
+    database: MOVIELENS        # your Snowflake database
+    schema: RAW                # your schema in Snowflake
+    tables:
+      - name: raw_movies
+        identifier: RAW_MOVIES
+      - name: raw_tags
+        identifier: RAW_TAGS
+      - name: raw_ratings
+        identifier: RAW_RATINGS
+      - name: raw_links
+        identifier: RAW_LINKS
+      - name: raw_genome_tags
+        identifier: RAW_GENOME_TAGS
+      - name: raw_genome_scores     
+        identifier: RAW_GENOME_SCORES
