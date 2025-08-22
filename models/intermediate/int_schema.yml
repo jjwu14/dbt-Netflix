@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: int_movie_genres_concat
+    description: "Aggregated genres per movie, concatenated into a single string."
+    columns:
+      - name: movie_id
+        description: "Unique identifier for each movie"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('src_movies')
+              field: movie_id
+      - name: genres_string
+        description: "Concatenated string of genres for the movie, separated by commas"
+        tests:
+          - not_null
+
+  - name: int_movie_genres
+    description: "Identifies unique movie and their genres, each row represents a movie with its associated per genre."
+    columns:
+      - name: movie_id
+        description: "Unique identifier for each movie"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('src_movies')
+              field: movie_id
+      - name: genre_name
+        description: "Single genre associated with the movie"
+        tests:
+          - not_null
+
+  - name: int_user_daily_ratings
+    description: "Aggregates user ratings at a daily level for time-series analysis."
+    columns:
+      - name: user_id
+        description: "Unique identifier for each user"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('src_ratings')
+              field: user_id
+      - name: rating_date
+        description: "Date of the rating (day-level aggregation)"
+        tests:
+          - not_null
+      - name: daily_ratings_count
+        description: "Number of ratings given by the user on that day"
+      - name: daily_avg_rating
+        description: "Average rating given by the user on that day"
+
+  - name: int_user_profiles
+    description: "User-level attributes derived from ratings, including engagement levels."
+    columns:
+      - name: user_id
+        description: "Unique identifier for each user"
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('src_ratings')
+              field: user_id
+      - name: total_ratings
+        description: "Total number of ratings given by the user"
+      - name: overall_avg_rating
+        description: "Average rating given by the user across all movies"
+      - name: engagement_level
+        description: "User engagement category"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['High-Engagement', 'Medium-Engagement', 'Low-Engagement']
