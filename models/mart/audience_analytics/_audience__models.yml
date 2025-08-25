@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: fct_user_behaviour
+    description: "Fact table capturing user ratings for movies, enriched with user engagement and movie genres. Incremental table keyed by rating_id."
+    columns:
+      - name: rating_id
+        description: "Surrogate key for each rating event (unique)."
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "User identifier."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('int_user_profiles')
+              field: user_id
+      - name: movie_id
+        description: "Movie identifier."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('src_movies')
+              field: movie_id
+      - name: rating
+        description: "User's rating for the movie."
+        tests:
+          - not_null
+      - name: rating_timestamp
+        description: "Timestamp when the rating was submitted."
+        tests:
+          - not_null
+      - name: engagement_level
+        description: "Categorical engagement level of the user."
+      - name: user_total_ratings
+        description: "Total number of ratings the user has given."
+      - name: user_overall_avg_rating
+        description: "User's overall average rating across all movies."
+      - name: genres_string
+        description: "Concatenated genres for the movie."
+      - name: rated_year
+        description: "Year when the rating was given."
+      - name: rated_month
+        description: "Month when the rating was given."
+      - name: rated_day_of_month
+        description: "Day of month when the rating was given."
+      - name: rated_day_of_week
+        description: "Day of week when the rating was given (1=Sunday)."

@@ -24,7 +24,6 @@ models:
         description: "Unique identifier for each movie"
         tests:
           - not_null
-          - unique
           - relationships:
               to: ref('src_movies')
               field: movie_id

@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: dim_movie_tag_profile     
+    description: "Maps movies to their top tags. One row per movie with aggregated top tags list."
+    columns:
+      - name: movie_id
+        description: "Unique movie identifier."
+        tests:
+          - not_null
+          - unique
+      - name: title
+        description: "Movie title."
+        tests:
+          - not_null
+      - name: top_tags_list
+        description: "Comma-separated list of top tags for the movie."
+        tests:
+          - not_null
+  - name: fct_tag_performance
+    description: "Aggregated metrics to measure tag performance across movies."
+    columns:
+      - name: tag_id
+        description: "Unique tag identifier."
+        tests:
+        - not_null
+        - unique
+      - name: tag
+        description: "Tag text."
+        tests:
+        - not_null
+      - name: movies_with_tag
+        description: "Number of movies associated with this tag."
+        tests:
+        - not_null
+        - relationships:
+            to: ref('movie_tag_profile')
+            field: movie_id
+      - name: total_ratings_on_tagged_movies
+        description: "Sum of ratings from movies with this tag."
+        tests:
+        - not_null
+      - name: weighted_avg_rating
+        description: "Weighted average rating of movies with this tag."
+        tests:
+        - not_null

@@ -2,18 +2,84 @@ version: 2
 
 sources:
   - name: movielens
-    database: MOVIELENS        # your Snowflake database
-    schema: RAW                # your schema in Snowflake
+    database: MOVIELENS
+    schema: RAW
+    description: "Raw data from the MovieLens dataset, representing the original source files."
+
     tables:
       - name: raw_movies
         identifier: RAW_MOVIES
+        description: "Contains metadata for each movie, including its title and genres."
+        columns:
+          - name: MOVIEID
+            tests:
+              - not_null
+              - unique
+          - name: TITLE
+            tests:
+              - not_null
+
       - name: raw_tags
         identifier: RAW_TAGS
+        description: "Raw tags submitted by users to movies."
+        columns:
+          - name: TAG
+            tests:
+              - not_null
+
       - name: raw_ratings
         identifier: RAW_RATINGS
+        description: "User ratings for movies."
+        columns:
+          - name: USERID
+            tests:
+              - not_null
+          - name: MOVIEID
+            tests:
+              - not_null
+              - relationships:
+                  to: source('movielens', 'raw_movies')
+                  field: MOVIEID
+          - name: RATING
+            tests:
+              - not_null
+          - name: TIMESTAMP
+            tests:
+              - not_null
+
       - name: raw_links
         identifier: RAW_LINKS
+        description: "External identifiers for movies (e.g., IMDb, TMDb)."
+        columns:
+          - name: MOVIEID
+            tests:
+              - not_null
+              - unique
+
       - name: raw_genome_tags
         identifier: RAW_GENOME_TAGS
-      - name: raw_genome_scores     
+        description: "Movie tags from the tag genome dataset."
+        columns:
+          - name: TAGID
+            tests:
+              - not_null
+              - unique
+          - name: TAG
+            tests:
+              - not_null
+
+      - name: raw_genome_scores
         identifier: RAW_GENOME_SCORES
+        description: "Relevance scores for movie tags."
+        columns:
+          - name: TAGID
+            tests:
+              - not_null
+          - name: MOVIEID
+            tests:
+              - not_null
+          - name: RELEVANCE
+            description: "A score representing the relevance of a tag for a movie, on a scale from 0 to 1."
+            tests:
+              - not_null
+              - relevance_range
