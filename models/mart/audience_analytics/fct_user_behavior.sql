@@ -5,12 +5,6 @@
     on_schema_change='append_new_columns'
 ) }}
 
--- ==========================================
--- Fact table: fact_user_behavior
--- Audience analytics: combines user ratings with movie genres and user attributes
--- ==========================================
-
--- 1️⃣ Incremental filter for source ratings
 with ratings as (
     select
         {{ dbt_utils.generate_surrogate_key(['user_id', 'movie_id', 'rating_timestamp']) }} as rating_id,
@@ -24,7 +18,7 @@ with ratings as (
     {% endif %}
 ),
 
--- 2️⃣ Join user profiles
+
 ratings_with_user as (
     select
         r.*,
@@ -36,7 +30,6 @@ ratings_with_user as (
         on r.user_id = u.user_id
 ),
 
--- 3️⃣ Join movie genres
 ratings_enriched as (
     select
         ru.rating_id,
@@ -57,7 +50,6 @@ ratings_enriched as (
         on ru.movie_id = g.movie_id
 )
 
--- 4️⃣ Final select
 select * from ratings_enriched
 
 

@@ -27,9 +27,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   netflix:
     +materialized: view
-    dim:
-      +materialized: table
-    fct:
-      +materialized: table
     intermediate:
+      +materialized: table
+    mart:
       +materialized: table
