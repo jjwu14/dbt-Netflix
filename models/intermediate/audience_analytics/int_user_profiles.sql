@@ -4,6 +4,7 @@
 -- It calculates total ratings and average rating per user
 -- It categorizes users into engagement levels based on their total ratings
 -- The engagement levels are High-Engagement, Medium-Engagement, and Low-Engagement 
+
 with user_ratings_summary as (
     select
         user_id,

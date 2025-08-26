@@ -17,6 +17,17 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+seeds:
+  dbt_netflix:
+    movie_performance:
+      column_types:
+        category: STRING
+        min_ratings: NUMBER
+        avg_rating_threshold: NUMBER
+        priority: NUMBER
+      quote_columns: true
+
+
 # Configuring models
 models:
   dbt_netflix:

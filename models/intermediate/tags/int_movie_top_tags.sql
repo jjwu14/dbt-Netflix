@@ -1,3 +1,4 @@
+{{ config(materialized='table') }}
 select
   r.movie_id,
   r.tag_id,
