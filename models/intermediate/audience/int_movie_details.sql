@@ -1,4 +1,5 @@
-{{ config(materialized='table') }}
+-- this model is set to ephemeral because it is only used to join with other models, and only used by one downstream model
+{{ config(materialized='ephemeral') }}
 
 select
     movies.movie_id,

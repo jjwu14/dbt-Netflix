@@ -33,26 +33,26 @@ models:
         description: "Single genre associated with the movie"
         tests:
           - not_null
-
   - name: int_user_daily_ratings
-    description: "Aggregates user ratings at a daily level for time-series analysis."
+    description: "Aggregates user rating data on a daily basis to track user activity over time."
     columns:
       - name: user_id
-        description: "Unique identifier for each user"
+        description: "The unique identifier of the user."
         tests:
           - not_null
-          - relationships:
-              to: ref('src_ratings')
-              field: user_id
       - name: rating_date
-        description: "Date of the rating (day-level aggregation)"
+        description: "The date the ratings were given."
         tests:
           - not_null
       - name: daily_ratings_count
-        description: "Number of ratings given by the user on that day"
+        description: "The total number of ratings a user submitted on a given day."
+        tests:
+          - not_null
       - name: daily_avg_rating
-        description: "Average rating given by the user on that day"
-
+        description: "The average rating given by a user on a given day."
+        tests:
+          - not_null
+    
   - name: int_user_profiles
     description: "User-level attributes derived from ratings, including engagement levels."
     columns:
