@@ -74,3 +74,19 @@ models:
           - not_null
           - accepted_values:
               values: ['High-Engagement', 'Medium-Engagement', 'Low-Engagement']
+  - name: int_movie_details
+    description: "Intermediate model that combines essential movie metadata (title, genres) into a single table for downstream use."
+    columns:
+      - name: movie_id
+        description: "The unique identifier of the movie."
+        tests:
+          - not_null
+          - unique
+      - name: title
+        description: "The title of the movie."
+        tests:
+          - not_null
+      - name: genres_string
+        description: "A single, concatenated string of all genres for the movie."
+        tests:
+          - not_null
