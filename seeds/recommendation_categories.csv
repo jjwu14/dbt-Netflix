@@ -1,0 +1,4 @@
+category,min_ratings,avg_rating_threshold,priority
+evergreen,100,3.5,3
+rising_star,20,4.0,2
+fading,100,2.5,1

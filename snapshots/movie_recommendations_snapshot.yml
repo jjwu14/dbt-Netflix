@@ -1,0 +1,23 @@
+version: 2
+
+snapshots:
+  - name: movie_recommendations_snapshot
+    description: "A snapshot table that tracks how a movie's recommendation category changes over time."
+    columns:
+      - name: movie_id
+        description: "The unique identifier of the movie."
+        tests:
+          - not_null
+      - name: dbt_scd_id
+        description: "The unique ID for the snapshot row, automatically created by dbt."
+        tests:
+          - not_null
+          - unique
+      - name: dbt_valid_from
+        description: "The timestamp when the snapshot row became valid."
+        tests:
+          - not_null
+      - name: dbt_valid_to
+        description: "The timestamp when the snapshot row became invalid (i.e., when a change occurred)."
+      - name: recommendation_category
+        description: "The movie's recommendation category at the time the snapshot was taken."

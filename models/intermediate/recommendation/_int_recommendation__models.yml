@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: int_movie_recommendation
+    description: "Intermediate model to assign a single recommendation category to each movie based on rating count and average rating."
+    columns:
+      - name: movie_id
+        description: "The unique identifier of the movie."
+        tests:
+          - not_null
+          - unique
+      - name: rating_count
+        description: "The number of ratings the movie has received."
+        tests:
+          - not_null
+      - name: avg_rating
+        description: "The average rating of the movie."
+        tests:
+          - not_null
+      - name: recommendation_category
+        description: "The final, single recommendation category assigned to the movie."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['evergreen', 'rising_star', 'fading']

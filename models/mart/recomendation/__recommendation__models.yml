@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: fct_movie_recommendations
+    description: "A fact table that combines movie recommendation categories with movie details for a comprehensive view of content recommendations."
+    columns:
+      - name: movie_id
+        description: "The unique identifier for the movie."
+        tests:
+          - not_null
+          - unique
+      - name: title
+        description: "The title of the movie."
+        tests:
+          - not_null
+      - name: genres_string
+        description: "A string containing all genres associated with the movie, for easy filtering and analysis."
+        tests:
+          - not_null
+      - name: rating_count
+        description: "The total number of ratings for the movie."
+        tests:
+          - not_null
+      - name: avg_rating
+        description: "The average rating of the movie on a scale from 1 to 5."
+        tests:
+          - not_null
+      - name: recommendation_category
+        description: "The final strategic category assigned to the movie (e.g., evergreen, rising_star, fading)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['evergreen', 'rising_star', 'fading']
