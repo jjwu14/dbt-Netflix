@@ -1,13 +1,12 @@
-# test all pased 
-
 version: 2
 
 models:
   - name: int_movie_genres_concat
-    description: "Aggregated genres per movie, concatenated into a single string."
+    description: >-
+      This model aggregates movie genres into a single string per movie. It uses the src_movies model to extract genres and flatten them into a single string. The genres are separated by commas in the final output.
     columns:
       - name: movie_id
-        description: "Unique identifier for each movie"
+        description: "Unique identifier for each movie."
         tests:
           - not_null
           - unique
@@ -15,31 +14,34 @@ models:
               to: ref('src_movies')
               field: movie_id
       - name: genres_string
-        description: "Concatenated string of genres for the movie, separated by commas"
+        description: "Concatenated string of genres for the movie, separated by commas."
         tests:
           - not_null
 
   - name: int_movie_genres
-    description: "Identifies unique movie and their genres, each row represents a movie with its associated per genre."
+    description: "This model aggregates movie genres into a single string per movie. Each row represents a single genre for a movie."
     columns:
       - name: movie_id
-        description: "Unique identifier for each movie"
+        description: "Unique identifier for each movie."
         tests:
           - not_null
           - relationships:
               to: ref('src_movies')
               field: movie_id
       - name: genre_name
-        description: "Single genre associated with the movie"
+        description: "Single genre associated with the movie."
         tests:
           - not_null
   - name: int_user_daily_ratings
-    description: "Aggregates user rating data on a daily basis to track user activity over time."
+    description: "This is an incremental model that calculates daily user ratings statistics. It aggregates the number of ratings and average rating per user for each day."
     columns:
       - name: user_id
         description: "The unique identifier of the user."
         tests:
           - not_null
+          - relationships:
+              field: USERID
+              to: source('movielens', 'raw_ratings')
       - name: rating_date
         description: "The date the ratings were given."
         tests:
@@ -52,12 +54,12 @@ models:
         description: "The average rating given by a user on a given day."
         tests:
           - not_null
-    
+
   - name: int_user_profiles
-    description: "User-level attributes derived from ratings, including engagement levels."
+    description: "This model summarizes user ratings and their engagement levels. It calculates total ratings and average rating per user. It categorizes users into engagement levels based on their total ratings. The engagement levels are High-Engagement, Medium-Engagement, and Low-Engagement"
     columns:
       - name: user_id
-        description: "Unique identifier for each user"
+        description: "Unique identifier for each user."
         tests:
           - not_null
           - unique
@@ -65,17 +67,20 @@ models:
               to: ref('src_ratings')
               field: user_id
       - name: total_ratings
-        description: "Total number of ratings given by the user"
+        description: "Total number of ratings given by the user."
       - name: overall_avg_rating
-        description: "Average rating given by the user across all movies"
+        description: "Average rating given by the user across all movies."
       - name: engagement_level
-        description: "User engagement category"
+        description: "User engagement category."
         tests:
           - not_null
           - accepted_values:
-              values: ['High-Engagement', 'Medium-Engagement', 'Low-Engagement']
+              values:
+                - High-Engagement
+                - Low-Engagement
+                - Medium-Engagement
   - name: int_movie_details
-    description: "Intermediate model that combines essential movie metadata (title, genres) into a single table for downstream use."
+    description: "Intermediate model that combines essential movie metadata (movie ID, title, and genres) into a single table for downstream use. This model is set to ephemeral because it is only used to join with other models, and only used by one downstream model."
     columns:
       - name: movie_id
         description: "The unique identifier of the movie."
