@@ -1,0 +1,25 @@
+version: 2
+
+analyses:
+  - name: top_5_movies_by_category
+    description: >
+      This analysis shows the top 5 movies for each recommendation category 
+      based on average rating and rating count. It helps content, marketing, 
+      and recommendation teams quickly identify the highest-performing movies
+      in each category.
+    columns:
+      - name: recommendation_category
+        description: >
+          The recommendation category of the movie, e.g., 'evergreen', 'rising_star', or 'fading'.
+      - name: title
+        description: >
+          The title of the movie.
+      - name: genres_string
+        description: >
+          The genre(s) associated with the movie.
+      - name: rating_count
+        description: >
+          Total number of ratings the movie has received.
+      - name: avg_rating
+        description: >
+          Average rating of the movie based on user feedback.

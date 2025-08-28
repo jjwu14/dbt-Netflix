@@ -1,0 +1,36 @@
+version: 2
+
+analyses:
+  - name: top_5_genres_high_engagement
+    description: >
+      Identifies the top 5 individual movie genres based on average rating 
+      and total ratings count, specifically for High-Engagement users. 
+      Helps content and recommendation teams prioritize genres for targeted 
+      marketing and personalized recommendations.
+    columns:
+      - name: genre
+        description: >
+          The individual movie genre (e.g., Drama, Comedy).
+      - name: total_ratings_count
+        description: >
+          Total number of ratings for movies in this genre by High-Engagement users.
+      - name: average_rating
+        description: >
+          Average rating of movies in this genre by High-Engagement users.
+
+  - name: top_5_grouped_genres_high_engagement
+    description: >
+      Identifies the top 5 movie genres and genre groups (multiple genres per movie)
+      based on average rating and total ratings count, specifically for High-Engagement users. 
+      Useful for understanding popular genre combinations and prioritizing them for content 
+      acquisition and recommendations.
+    columns:
+      - name: genre
+        description: >
+          The grouped genres of a movie as a single string (e.g., "Comedy, Romance").
+      - name: total_ratings_count
+        description: >
+          Total number of ratings for movies in this genre group by High-Engagement users.
+      - name: average_rating
+        description: >
+          Average rating of movies in this genre group by High-Engagement users.

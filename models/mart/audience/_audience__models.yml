@@ -3,7 +3,7 @@
 version: 2
 
 models:
-  - name: fct_user_behaviour
+  - name: fct_user_behaviour_genres_concat
     description: "Fact table capturing user ratings for movies, enriched with user engagement and movie genres. Incremental table keyed by rating_id."
     columns:
       - name: rating_id
@@ -49,3 +49,61 @@ models:
         description: "Day of month when the rating was given."
       - name: rated_day_of_week
         description: "Day of week when the rating was given (1=Sunday)."
+
+  - name: fct_user_behaviour_genres
+    description: >
+      Fact table capturing user rating behaviour at the grain of
+      **one row per rating per genre**. Includes user profile
+      attributes, genre info, and rating timestamp breakdowns.
+    columns:
+      - name: rating_id
+        description: Surrogate key for unique rating-genre combinations
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        description: Unique identifier of the user who rated the movie
+        tests:
+          - not_null
+
+      - name: movie_id
+        description: Unique identifier of the rated movie
+        tests:
+          - not_null
+
+      - name: rating
+        description: Numeric rating given by the user
+        tests:
+          - not_null
+
+      - name: genre_name
+        description: Genre associated with the movie
+        tests:
+          - not_null
+
+      - name: rating_timestamp
+        description: Timestamp when the user submitted the rating
+        tests:
+          - not_null
+
+      - name: engagement_level
+        description: User’s engagement level bucket from int_user_profiles
+
+      - name: user_total_ratings
+        description: Total number of ratings by the user
+
+      - name: user_overall_avg_rating
+        description: User’s overall average rating across all movies
+
+      - name: rated_year
+        description: Year the rating was submitted
+
+      - name: rated_month
+        description: Month the rating was submitted
+
+      - name: rated_day_of_month
+        description: Day of month the rating was submitted
+
+      - name: rated_day_of_week
+        description: Day of week (1=Sunday, 7=Saturday) the rating was submitted
