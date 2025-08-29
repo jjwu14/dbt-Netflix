@@ -50,5 +50,6 @@ ratings_enriched as (
         on ru.movie_id = g.movie_id
 )
 
-select * from ratings_enriched
+select * 
+from ratings_enriched 
 

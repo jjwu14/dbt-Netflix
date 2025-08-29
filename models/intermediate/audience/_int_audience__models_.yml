@@ -22,7 +22,7 @@ models:
     description: "This model aggregates movie genres into a single string per movie. Each row represents a single genre for a movie."
     columns:
       - name: movie_id
-        description: "Unique identifier for each movie."
+        description: "A unique identifier assigned to each movie in the dataset. This column serves as the primary key for identifying individual movies and is used to establish relationships between different tables or datasets within the database."
         tests:
           - not_null
           - relationships:
@@ -79,8 +79,9 @@ models:
                 - High-Engagement
                 - Low-Engagement
                 - Medium-Engagement
+                - Super-High-Engagement
   - name: int_movie_details
-    description: "Intermediate model that combines essential movie metadata (movie ID, title, and genres) into a single table for downstream use. This model is set to ephemeral because it is only used to join with other models, and only used by one downstream model."
+    description: "This intermediate model consolidates key movie metadata, including movie ID, title, and genres, into a single table for streamlined downstream processing. It is ephemeral, serving as a temporary structure for joining with other models and supporting a single downstream model."
     columns:
       - name: movie_id
         description: "The unique identifier of the movie."

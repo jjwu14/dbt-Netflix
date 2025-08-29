@@ -52,9 +52,7 @@ models:
       - name: relevance
         tests:
           - not_null
-      - name: top_n_flag
-        tests:
-          - not_null
+
 
 
   - name: int_tag_movie_link

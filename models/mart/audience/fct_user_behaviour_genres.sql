@@ -72,3 +72,5 @@ ratings_enriched as (
 
 select * 
 from ratings_enriched
+
+

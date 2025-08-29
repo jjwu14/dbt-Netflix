@@ -1,10 +1,16 @@
 {{ config(materialized='table') }}
 
 with movie_stats as (
-    select * from {{ ref('int_movie_rating_stats') }}
+    select 
+        movie_id,
+        rating_count,
+        unique_raters,
+        avg_rating
+    from {{ ref('int_movie_rating_stats') }}
 ),
 movie_tags as (
-    select * from {{ ref('int_tag_movie_link') }}
+    select distinct movie_id, tag_id, tag
+    from {{ ref('int_tag_movie_link') }}
 ),
 tag_join as (
     select
@@ -21,10 +27,10 @@ tag_join as (
 by_tag as (
     select
         tag_id,
-        any_value(tag) as tag,
+        min(tag) as tag,
         count(distinct movie_id) as movies_with_tag,
         sum(rating_count) as total_ratings_on_tagged_movies,
-        {{ weighted_avg('avg_rating','rating_count') }} as weighted_avg_rating
+        sum(avg_rating * rating_count) / nullif(sum(rating_count),0) as weighted_avg_rating
     from tag_join
     group by tag_id
 )

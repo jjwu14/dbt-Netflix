@@ -10,8 +10,3 @@ SELECT
   tag,
   TO_TIMESTAMP_LTZ(timestamp) AS tag_timestamp
 FROM raw_tags
-
- 
-
-
- 

@@ -1,11 +1,3 @@
--- This analysis identifies the top 5 movie genres and genre groups based on average rating
--- and total ratings count, specifically for High-Engagement users.
-
--- Why this is useful:
--- The results can inform content acquisition strategies,
--- personalized recommendations, and targeted marketing campaigns
--- for your most valuable users.
-
 SELECT
     genres_string AS genre,
     COUNT(rating) AS total_ratings_count,
