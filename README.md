@@ -120,7 +120,8 @@ The DBT DAG below illustrates the full data flow, from raw source tables to fina
 
 <img src="images/dbt-dag.png" alt="DBT DAG" width="800" height="400">
 
-
+Explore the data lineage and model documentation here:  
+[View dbt Docs](https://jjwu14.github.io/dbt-Netflix/)
 
 <br>
 
@@ -346,14 +347,19 @@ This ensures all **SQL transformations, macros, and documentation** are tracked,
 
 # References & Resources
 
-## 14. Project Links & Visualizations
+## 14. Project Documentation & Visualizations
 **Power BI Dashboard**:  
 [View Dashboard](https://app.powerbi.com/view?r=eyJrIjoiNGUwZGU5ZmYtOWEwMC00NTYwLWI1MzktM2NkMmMxNmYyNDBkIiwidCI6IjU0NzA0MGRiLTE4NTUtNDMyMC05NzM4LWU2ODc4ZjYyNzFmYyIsImMiOjN9&pageName=01bc7700856d487d8cfcr)
  
 <img src="images/PBI%20Screenshot.001.jpeg" alt="Power BI Screenshot" width="700" height="400">
 
-
+**Live dbt Documentation**: 
+Explore the data lineage and model documentation here:  
+[View dbt Docs](https://jjwu14.github.io/dbt-Netflix/)
 <br>
+
+
+
 
 ## 15. About the Data
 This project uses the **MovieLens 20M Dataset**, containing **20M+ ratings and 465K tag applications** across **27K movies** from **138K users** (1995–2015).
