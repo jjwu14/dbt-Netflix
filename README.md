@@ -354,6 +354,7 @@ This ensures all **SQL transformations, macros, and documentation** are tracked,
 <img src="images/PBI%20Screenshot.001.jpeg" alt="Power BI Screenshot" width="700" height="400">
 
 **Live dbt Documentation**: 
+
 Explore the data lineage and model documentation here:  
 [View dbt Docs](https://jjwu14.github.io/dbt-Netflix/)
 <br>
