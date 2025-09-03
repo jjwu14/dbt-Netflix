@@ -1,0 +1,6 @@
+
+
+select *
+from MOVIELENS.RAW.RAW_GENOME_SCORES
+where RELEVANCE < 0 or RELEVANCE > 1
+

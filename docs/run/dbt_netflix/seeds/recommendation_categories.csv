@@ -1,0 +1,12 @@
+
+    
+    
+    truncate table "MOVIELENS"."DEV"."RECOMMENDATION_CATEGORIES";
+    -- dbt seed --
+    
+            insert into MOVIELENS.DEV.recommendation_categories (category, min_ratings, avg_rating_threshold, priority) values
+            (%s,%s,%s,%s),(%s,%s,%s,%s),(%s,%s,%s,%s)
+        
+
+;
+  
